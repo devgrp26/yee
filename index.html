@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My First Site</title>
+
     <style>
         body{
             margin:0;
@@ -19,6 +20,13 @@
             color:white
         }
     </style>
+
+
+<script src="./resource/xlsx.min.js"></script>
+    <script src="./resource/alasql.min.js"></script>
+
+    <!--Excel to Json -->
+    <script src="./resource/excelTojson.js"></script>
 </head>
 <body>
     <nav>
@@ -33,7 +41,27 @@
         </tr>
     </table>
     <div id="data"></div>
-    <script>
+
+
+    <input type="file"  id="inputFile" >
+    <button onclick="test()">test</button>
+    <button onclick="getData()">get data</button>
+
+<script>
+/* 
+const fileInput = document.getElementById('input');
+const button = document.querySelector('button');
+
+const browse = ()=>{
+    fileInput.click();
+}
+
+fileInput.onchange = () => {
+  const selectedFiles = [...fileInput.files];
+  console.log(selectedFiles);
+}
+ */
+
         const vText = document.getElementById('vText')
         const display = document.getElementById('data')
 
@@ -82,6 +110,22 @@
         const remove = (index)=>{
             displayRecords(vdata.remove(index))
         }
+
+        const xj = new excelToJson()
+
+    const test = ()=>{
+        
+        xj.upload('inputFile')
+
+
+    }
+    
+    
+    const getData = ()=>{
+        console.log(xj.getData())
+    }
+
+
     </script>
 </body>
 </html>
