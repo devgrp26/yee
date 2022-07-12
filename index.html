@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First Site</title>
+<table>
+    <tr>
+        <td><input type="text" name="" id="vText"></td>
+        <td><button onclick="add()">Add</button></td>
+    </tr>
+</table>
+<div id="data"></div>
+</head>
+<body>
+    <h1>Hey There</h1>
+    <script>
+        const vText = document.getElementById('vText')
+        const display = document.getElementById('data')
+
+        const data = function(){
+            let d = []
+
+            return {
+                add: (item)=>{
+                    d.push(item)
+
+                    return d
+                },
+                remove: (index)=>{
+                    d.splice(index,1)
+
+                    return d
+                },
+                clearAll: ()=>{
+                    d=[]
+
+                    return d
+                },
+                getAll:()=>{
+                    return d
+                },
+                get:(index)=>{
+                    return d[index]
+                }
+
+            }
+        }
+        //global declaration of variable
+        let vdata = new data()
+        const add = ()=>{
+            displayRecords(vdata.add(vText.value))
+        }
+        const displayRecords = (v)=>{
+            let tr=[]
+            if(typeof v=='object'){
+               v.forEach((item,index)=>{
+                    tr.push(`<tr><td><button onclick="remove(${index})">&times;</button></td><td>${(index+1)}</td><td>${item}</td></tr>`)
+                })
+                display.innerHTML = `<table>${tr.join('')}</table>`
+            }
+        }
+        const remove = (index)=>{
+            displayRecords(vdata.remove(index))
+        }
+    </script>
+</body>
+</html>
