@@ -3,7 +3,7 @@
 
 const excelToJson = function(){
 
-    let data=[]
+    let vdata=[]
 
 
     const ej = function(file){
@@ -22,17 +22,17 @@ const excelToJson = function(){
                   let roa = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
                   if (roa.length > 0) {
                     result[sheetName] = roa;
+
+                    vdata=result
                   }
                 }
               );
               
-              console.log(result)
-              
 
               let t = setInterval(()=>{
-                if(data){
+                if(vdata){
+                  console.log('success!')
                   clearInterval(t)
-                  alert(true)
                 }
               },1000)
 
@@ -58,11 +58,13 @@ const excelToJson = function(){
               return;
             }
             let filename = files[0].name;
-            let extension = filename.substring(filename.lastIndexOf(".")).toUpperCase();
+            let ext = filename.substring(filename.lastIndexOf(".")).toLowerCase();
 
 
-            
-            if (extension == '.XLS' || extension == '.XLSX') {
+
+            const excelFiles = ['.xls','.xlsx','.csv','.xlsb']
+
+            if(excelFiles.indexOf(ext)!=-1){
               ej(files[0])
             }
             else{
@@ -71,7 +73,7 @@ const excelToJson = function(){
         },
         
         getData:()=>{
-            return data
+            return vdata
         }
     }
 }
